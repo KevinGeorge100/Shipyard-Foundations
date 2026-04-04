@@ -1,3 +1,8 @@
+![Docker](https://img.shields.io/badge/Docker-Containerization-blue?logo=docker)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blue?logo=kubernetes)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-black?logo=githubactions)
+![Status](https://img.shields.io/badge/Project-Active-success)
+
 # 🚀 DevOps Learning Journey - Shipyard Foundations
 
 Hi, I'm Kevin George 👋  
