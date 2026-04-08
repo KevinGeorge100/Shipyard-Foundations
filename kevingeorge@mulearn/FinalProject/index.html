@@ -1,11 +1,381 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CampusPay Final Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kevin George — DevOps Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f6f3;
+      --ink: #141414;
+      --ink-muted: #6b6b6b;
+      --accent: #1a5c3a;
+      --accent-light: #e8f2ec;
+      --border: #e0ddd7;
+      --card-bg: #ffffff;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── STUDENT CARD ── */
+    .student-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 3.5rem;
+      width: fit-content;
+    }
+
+    .avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      color: #fff;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .student-info .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .student-info .name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── TECH STACK ── */
+    .stack-section { margin-bottom: 3.5rem; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+
+    .stack-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--ink);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .pill:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    .pill .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 3.5rem;
+    }
+
+    .info-cell {
+      background: var(--card-bg);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .info-cell .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .info-cell .value {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── LINKS ── */
+    .links-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.3rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #333; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s forwards;
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.05s; }
+    .fade-in:nth-child(2) { animation-delay: 0.15s; }
+    .fade-in:nth-child(3) { animation-delay: 0.25s; }
+    .fade-in:nth-child(4) { animation-delay: 0.35s; }
+    .fade-in:nth-child(5) { animation-delay: 0.45s; }
+    .fade-in:nth-child(6) { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My First Scalable Web App</h1>
-    <p>Student: Kevin George</p>
+
+  <nav>
+    <a class="nav-logo" href="#">Kevin George</a>
+    <div class="nav-links">
+      <a href="https://www.linkedin.com/in/kwingeorge" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/KevinGeorge100" target="_blank">GitHub ↗</a>
+    </div>
+  </nav>
+
+  <main class="hero">
+
+    <div class="tag fade-in">Live on Kubernetes</div>
+
+    <h1 class="fade-in">
+      My First<br/><em>Scalable</em> Web App
+    </h1>
+
+    <p class="subtitle fade-in">
+      A containerised web application deployed to a local Kubernetes cluster using Docker + KIND —
+      demonstrating replicas, self-healing, and environment-variable injection.
+    </p>
+
+    <div class="student-card fade-in">
+      <div class="avatar" id="initials">KG</div>
+      <div class="student-info">
+        <div class="label">Deployed by</div>
+        <div class="name" id="student-name">Kevin George</div>
+      </div>
+    </div>
+
+    <div class="stack-section fade-in">
+      <div class="section-label">Tech Stack</div>
+      <div class="stack-pills">
+        <div class="pill"><span class="dot" style="background:#2496ED"></span>Docker</div>
+        <div class="pill"><span class="dot" style="background:#326CE5"></span>Kubernetes</div>
+        <div class="pill"><span class="dot" style="background:#009639"></span>Nginx</div>
+        <div class="pill"><span class="dot" style="background:#F7DF1E"></span>KIND (K8s in Docker)</div>
+        <div class="pill"><span class="dot" style="background:#141414"></span>kubectl</div>
+      </div>
+    </div>
+
+    <div class="info-grid fade-in">
+      <div class="info-cell">
+        <div class="label">Institution</div>
+        <div class="value">AJCE, Kanjirappally</div>
+      </div>
+      <div class="info-cell">
+        <div class="label">Replicas</div>
+        <div class="value">3 Pods Running</div>
+      </div>
+      <div class="info-cell">
+        <div class="label">Self-Healing</div>
+        <div class="value">Enabled ✓</div>
+      </div>
+    </div>
+
+    <div class="links-row fade-in">
+      <a class="btn btn-primary" href="https://github.com/KevinGeorge100" target="_blank">
+        ↗ View on GitHub
+      </a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/kwingeorge" target="_blank">
+        ↗ LinkedIn
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    Built with Docker · Kubernetes · Nginx &nbsp;·&nbsp; Amal Jyothi College of Engineering
+  </footer>
+
+  <script>
+    fetch('/env')
+      .then(res => res.ok ? res.text() : Promise.reject())
+      .then(name => {
+        name = name.trim();
+        if (name) {
+          document.getElementById('student-name').textContent = name;
+          const parts = name.split(' ');
+          document.getElementById('initials').textContent =
+            parts.map(p => p[0]).join('').toUpperCase().slice(0, 2);
+        }
+      })
+      .catch(() => {});
+  </script>
+
 </body>
 </html>
-
