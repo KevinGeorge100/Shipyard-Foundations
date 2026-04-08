@@ -18,3 +18,6 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 80
+        env:
+        - name: STUDENT_NAME
+          value: "Kevin George"
