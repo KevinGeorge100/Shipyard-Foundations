@@ -1,1 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finalproject-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: finalproject
+  template:
+    metadata:
+      labels:
+        app: finalproject
+    spec:
+      containers:
+      - name: finalproject-container
+        image: finalproject:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: STUDENT_NAME
+          value: "Kevin George"
 
